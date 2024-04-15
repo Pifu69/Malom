@@ -17,3 +17,9 @@ Point& Shell::operator[](int point){
     if (point < 0) point = Num_Of_Points + point;
     return *Shell_Points[point];
 }
+
+Shell::~Shell() {
+    for (size_t i = 0; i < 8; i++) {
+        delete Shell_Points[i];
+    }
+}

@@ -10,11 +10,14 @@
 class Piece{
     Colour Team_Colour;
     std::optional<Position> Piece_Position;
+    bool Is_Selected;
     static const int Radius = 20;
 public:
     Piece(Colour = None);
 
     bool is_on_field() const;
+
+    bool is_selected() const;
 
     Position get_position() const;
 

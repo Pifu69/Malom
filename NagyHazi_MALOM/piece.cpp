@@ -1,8 +1,12 @@
 #include "piece.h"
-Piece::Piece(Colour colour) : Team_Colour(colour) {}
+Piece::Piece(Colour colour) : Team_Colour(colour), Is_Selected(false) {}
 
 bool Piece::is_on_field() const {
     return Piece_Position.has_value();
+}
+
+bool Piece::is_selected() const {
+    return Is_Selected;
 }
 
 Position Piece::get_position() const { return Piece_Position.value(); }

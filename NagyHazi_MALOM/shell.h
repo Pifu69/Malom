@@ -16,6 +16,8 @@ public:
     Shell(size_t index);
     const Point& operator[](int) const;
     Point& operator[](int);
+
+    ~Shell();
 };
 
 #endif //NAGYHAZI_MALOM_SHELL_H
