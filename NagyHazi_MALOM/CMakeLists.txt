@@ -24,6 +24,8 @@ add_executable(NagyHazi_MALOM
         corner_point.h
         position.cpp
         position.h
+        game.cpp
+        game.h
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

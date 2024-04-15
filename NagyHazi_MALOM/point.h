@@ -7,15 +7,16 @@
 
 class Point {
 protected:
-    Player Piece_Owner;
-    Team_Colour colour;
-    size_t Point_Index;
+    Colour colour;
+    Position Position;
 public:
-    Point() : colour(None), Piece_Owner(Name()) {}
-    Team_Colour get_state() const;
-    void set_state(Team_Colour);
+    Point(size_t shell_index, size_t index);
+    Colour get_state() const;
+    void set_state(Colour);
 
-    virtual bool Checking_Neighbours(const Map&) = 0;
+    virtual bool Checking_Neighbours(const Map&) const = 0;
+
+    virtual ~Point() {}
 };
 
 #endif //NAGYHAZI_MALOM_FIELD_H

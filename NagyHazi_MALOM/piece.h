@@ -4,17 +4,25 @@
 #include <vector>
 #include <string>
 #include "position.h"
+#include "colour.h"
+#include <SFML/Graphics.hpp>
 
 class Piece{
-    Position Piece_Position;
+    Colour Team_Colour;
+    std::optional<Position> Piece_Position;
+    static const int Radius = 20;
 public:
-    Piece();
+    Piece(Colour = None);
+
+    bool is_on_field() const;
 
     Position get_position() const;
 
-    void set_piece(const Position&);
+    void set_position(const Position&);
 
-    Piece& operator=(const Piece&);
+    sf::Vector2f where_to_draw() const;
+
+    void draw_piece(sf::RenderWindow& w) const ;
 
 };
 #endif //NAGYHAZI_MALOM_PIECE_H

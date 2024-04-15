@@ -1,7 +1,7 @@
 #ifndef NAGYHAZI_MALOM_COLOUR_H
 #define NAGYHAZI_MALOM_COLOUR_H
 
-enum Team_Colour{
+enum Colour{
     White, Black, None
 };
 

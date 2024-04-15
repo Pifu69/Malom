@@ -1,5 +1,7 @@
 #include "position.h"
 
+Position::Position(int shell, int point) : Position_Shell(shell), Position_Point(point) {}
+
 void Position::set_position(int shell, int point) {
     Position_Shell = shell;
     Position_Point = point;

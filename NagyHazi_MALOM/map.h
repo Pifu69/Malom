@@ -8,12 +8,9 @@ class Map {
     int Num_Of_Shells;
     std::array<Shell, 3> Game_Map;
 public:
-    Map() : Num_Of_Shells(3) {
-        for (size_t i = 0; i < Num_Of_Shells; i++){
-            Game_Map[i] = Shell(i);
-        }
-    }
+    Map();
 
+    const Shell& operator[](int) const;
     Shell& operator[](int);
 };
 

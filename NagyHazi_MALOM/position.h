@@ -5,7 +5,7 @@ class Position {
     int Position_Shell;
     int Position_Point;
 public:
-    Position(int shell = -1, int point = -1) : Position_Shell(shell), Position_Point(point) {}
+    Position(int shell = -1, int point = -1);
 
     void set_position(int shell, int point);
     int get_shell() const;

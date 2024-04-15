@@ -4,7 +4,7 @@
 
 class Corner_Point : public Point {
 public:
-    Corner_Point() : Point() {}
+    Corner_Point(size_t shell_index, size_t index);
 
     bool Checking_Neighbours(const Map&) const;
 
