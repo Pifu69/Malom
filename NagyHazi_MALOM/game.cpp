@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), Black_Player(Black), White_Player(White){}
+Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), Black_Player(Black), White_Player(White) {}
 
 Player Game::get_white_player() const {
     return White_Player;
@@ -34,6 +34,7 @@ void Game::switch_turn() {
     switch (Turn) {
         case White: Turn = Black; break;
         case Black: Turn = White; break;
+        default: break;
     }
 }
 
@@ -46,6 +47,7 @@ void Game::step_phase() {
             if (White_Player.get_num() < 4 || Black_Player.get_num() < 4) Game_Phase = Third;
             break;
         case Third: if (White_Player.get_num() < 3 || Black_Player.get_num() < 3)  Game_Phase = End; break;
+        default: break;
     }
 }
 
@@ -60,3 +62,4 @@ bool Game::second_phase() const {
 bool Game::third_phase() const {
     return (Game_Phase == Third);
 }
+

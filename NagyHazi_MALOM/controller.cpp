@@ -59,15 +59,17 @@ void Controller::first_phase_controller(const Game& game, sf::Vector2f click) {
     Position clicked = which_point_clicked(click, None).value();
     switch (on_turn) {
         case White:
+            Game_State[clicked.get_shell()][clicked.get_point()].set_state(White);
             game.get_white_player().set_piece_on_field(clicked);
             game.get_white_player().increase_num();
-            if (Game_State[clicked.get_shell()][clicked.get_point()].checking_neighbours(Game_State))
+            if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_white_player().set_trap_true();
             break;
         case Black:
+            Game_State[clicked.get_shell()][clicked.get_point()].set_state(Black);
             game.get_black_player().set_piece_on_field(clicked);
             game.get_black_player().increase_num();
-            if (Game_State[clicked.get_shell()][clicked.get_point()].checking_neighbours(Game_State))
+            if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_black_player().set_trap_true();
             break;
         default: break;
@@ -95,18 +97,22 @@ void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
     if (expected == None && on_turn == White) {
         size_t idx = game.get_white_player().search_selected();
         if (is_move_valid(game.get_white_player().get_pieces()[idx].get_position(), clicked)) {
+            Game_State[game.get_white_player().get_pieces()[idx].get_position().get_shell()][game.get_white_player().get_pieces()[idx].get_position().get_point()].set_state(None);
+            Game_State[clicked.get_shell()][clicked.get_point()].set_state(White);
             game.get_white_player().get_pieces()[idx].set_position(clicked);
             game.get_white_player().get_pieces()[idx].set_selection_false();
-            if (Game_State[clicked.get_shell()][clicked.get_point()].checking_neighbours(Game_State))
+            if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_white_player().set_trap_true();
         }
     }
     if (expected == None && on_turn == Black) {
         size_t idx = game.get_black_player().search_selected();
         if (is_move_valid(game.get_white_player().get_pieces()[idx].get_position(), clicked)) {
+            Game_State[game.get_black_player().get_pieces()[idx].get_position().get_shell()][game.get_black_player().get_pieces()[idx].get_position().get_point()].set_state(None);
+            Game_State[clicked.get_shell()][clicked.get_point()].set_state(Black);
             game.get_black_player().get_pieces()[idx].set_position(clicked);
             game.get_black_player().get_pieces()[idx].set_selection_false();
-            if (Game_State[clicked.get_shell()][clicked.get_point()].checking_neighbours(Game_State))
+            if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_black_player().set_trap_true();
         }
     }
@@ -118,5 +124,9 @@ void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
         size_t idx = game.get_black_player().search_piece(clicked);
         game.get_black_player().get_pieces()[idx].set_selection_true();
     }
+}
+
+void Controller::third_phase_controller(const Game &, sf::Vector2f) {
+    return;
 }
 

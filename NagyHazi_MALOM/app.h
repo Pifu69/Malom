@@ -1,17 +1,15 @@
 #ifndef NAGYHAZI_MALOM_APP_H
 #define NAGYHAZI_MALOM_APP_H
 
-#include "game.h"
 #include <SFML/Graphics.hpp>
 #include "piece.h"
 #include <iostream>
 #include <array>
-#include "controller.h"
+#include "game_mechanic.h"
 
 class App {
     sf::RenderWindow Window;
-    Game Malom_Game;
-    Controller Game_Controller;
+    Game_Mech Malom;
 public:
     App();
 

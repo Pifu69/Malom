@@ -1,17 +1,17 @@
 #include "point.h"
 
-Point::Point(size_t shell_index, size_t index) : colour(None), Point_Position(shell_index, index) {}
+Point::Point(size_t shell_index, size_t index) : Point_Colour(None), Point_Position(shell_index, index) {}
 
 Position Point::get_position() const {
     return Point_Position;
 }
 
 Colour Point::get_state() const {
-    return colour;
+    return Point_Colour;
 }
 
 void Point::set_state(Colour tc) {
-    colour = tc;
+    Point_Colour = tc;
 }
 
 

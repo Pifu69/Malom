@@ -13,6 +13,8 @@ public:
 
     const Shell& operator[](int) const;
     Shell& operator[](int);
+
+    bool checking_neighbours(const Point&) const;
 };
 
 

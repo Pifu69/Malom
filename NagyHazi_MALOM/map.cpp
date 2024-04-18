@@ -14,3 +14,18 @@ Shell& Map::operator[](int shell) {
     return Game_Map[shell];
 }
 
+bool Map::checking_neighbours(const Point& New_Point) const {
+    Colour colour = New_Point.get_state();
+    int shell = New_Point.get_position().get_shell();
+    int point = New_Point.get_position().get_point();
+    if (point % 2 != 0) {
+        if (Game_Map[shell][point-1].get_state() == colour && Game_Map[shell][point-2].get_state() == colour) return true;
+        if (Game_Map[shell][point+1].get_state() == colour && Game_Map[shell][point+2].get_state() == colour) return true;
+    }
+    if (point % 2 == 0) {
+        if (Game_Map[shell][point-1].get_state() == colour && Game_Map[shell][point+1].get_state() == colour) return true;
+        if (Game_Map[shell-1][point].get_state() == colour && Game_Map[shell+1][point].get_state() == colour) return true;
+    }
+    return false;
+}
+

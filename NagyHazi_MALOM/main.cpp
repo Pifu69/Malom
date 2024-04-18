@@ -1,6 +1,8 @@
 #include <iostream>
-#include "game.h"
+#include "app.h"
 
 int main(void){
+    App app;
+    app.app();
     return 0;
 }

@@ -6,20 +6,17 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(NagyHazi_MALOM
         piece.cpp
         player.cpp
-        name.cpp
         main.cpp
         map.cpp
         shell.cpp
         point.cpp
-        edge_point.cpp
-        corner_point.cpp
         position.cpp
         game.cpp
         app.cpp
         controller.cpp
         controller.h
-        phase.h
-        turn.h
+        game_mechanic.cpp
+        game_mechanic.h
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

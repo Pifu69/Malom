@@ -2,7 +2,6 @@
 #define NAGYHAZI_MALOM_PLAYER_H
 #include <iostream>
 #include "piece.h"
-#include "name.h"
 #include "colour.h"
 #include <array>
 #include "position.h"
@@ -15,7 +14,6 @@ class Player{
 public:
     Player(Colour colour);
 
-    Name get_Name() const;
     int get_num() const;
     std::array<Piece, 9> get_pieces() const;
     bool has_trap() const;

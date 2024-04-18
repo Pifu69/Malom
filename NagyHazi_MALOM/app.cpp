@@ -1,6 +1,6 @@
 #include "app.h"
 
-App::App() : Malom_Game(), Game_Controller() {
+App::App() : Malom() {
     Window.create(sf::VideoMode(1080, 1080), "Malom", sf::Style::Close);
 }
 
@@ -25,7 +25,7 @@ void App::show() {
     sf::RectangleShape rect;
     rect.setSize(sf::Vector2f(1080, 1080));
     rect.setTexture(&texture);
-    std::array<Piece, 18> All_Pieces = Malom_Game.get_view();
+    std::array<Piece, 18> All_Pieces = Malom.get_game().get_view();
     for (size_t i = 0; i < 18; i++) {
         draw_piece(All_Pieces[i]);
     }
@@ -39,8 +39,9 @@ void App::app() {
                 Window.close();
             if (Event.type == sf::Event::MouseButtonPressed && Event.mouseButton.button == sf::Mouse::Right) {
                 sf::Vector2f click(Event.mouseButton.x, Event.mouseButton.y);
-                ////////////////////////First_Phase////////////////////////////////////////
+                Malom.phase_control(click);
             }
         }
+        show();
     }
 }
