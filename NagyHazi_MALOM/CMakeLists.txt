@@ -5,27 +5,21 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(NagyHazi_MALOM
         piece.cpp
-        piece.h
         player.cpp
-        player.h
         name.cpp
-        name.h
         main.cpp
         map.cpp
-        map.h
         shell.cpp
-        shell.h
         point.cpp
-        point.h
-        colour.h
         edge_point.cpp
-        edge_point.h
         corner_point.cpp
-        corner_point.h
         position.cpp
-        position.h
         game.cpp
-        game.h
+        app.cpp
+        controller.cpp
+        controller.h
+        phase.h
+        turn.h
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

@@ -1,33 +1,62 @@
 #include "game.h"
 
-Game::Game() : Black_Player(Black), White_Player(White){
-    Window.create(sf::VideoMode(1080, 1080), "Malom", sf::Style::Close);
-}
-
-sf::RenderWindow& Game::get_window() {
-    return Window;
-}
+Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), Black_Player(Black), White_Player(White){}
 
 Player Game::get_white_player() const {
     return White_Player;
 }
 
-
 Player Game::get_black_player() const {
     return Black_Player;
 }
 
-void Game::show() {
-    sf::Texture texture;
-    texture.loadFromFile("malomtabla.png");
-
-    sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f(1080, 1080));
-    rect.setTexture(&texture);
-    Window.clear(sf::Color::White);
-    Window.draw(rect);
+std::array<Piece, 18> Game::get_view() const {
+    std::array<Piece, 18> All_Pieces;
+    size_t idx = 0;
     for (size_t i = 0; i < 9; i++) {
-        if (White_Player.get_pieces()[i].is_on_field()) White_Player.get_pieces()[i].draw_piece(Window);
+        All_Pieces[idx++] = White_Player.get_pieces()[i];
     }
-    Window.display();
+    for (size_t i = 0; i < 9; i++) {
+        All_Pieces[idx++] = Black_Player.get_pieces()[i];
+    }
+    return All_Pieces;
+}
+
+Phase Game::get_phase() const {
+    return Game_Phase;
+}
+
+Colour Game::get_turn() const {
+    return Turn;
+}
+
+void Game::switch_turn() {
+    switch (Turn) {
+        case White: Turn = Black; break;
+        case Black: Turn = White; break;
+    }
+}
+
+void Game::step_phase() {
+    switch (Game_Phase) {
+        case First:
+            if (Game_Round > 9) Game_Phase = Second;
+            break;
+        case Second:
+            if (White_Player.get_num() < 4 || Black_Player.get_num() < 4) Game_Phase = Third;
+            break;
+        case Third: if (White_Player.get_num() < 3 || Black_Player.get_num() < 3)  Game_Phase = End; break;
+    }
+}
+
+bool Game::first_phase() const {
+    return (Game_Phase == First);
+}
+
+bool Game::second_phase() const {
+    return (Game_Phase == Second);
+}
+
+bool Game::third_phase() const {
+    return (Game_Phase == Third);
 }

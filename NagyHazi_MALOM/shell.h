@@ -1,5 +1,6 @@
 #ifndef NAGYHAZI_MALOM_SHELL_H
 #define NAGYHAZI_MALOM_SHELL_H
+
 #include <iostream>
 #include "point.h"
 #include "corner_point.h"

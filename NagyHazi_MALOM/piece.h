@@ -1,7 +1,6 @@
 #ifndef NAGYHAZI_MALOM_PIECE_H
 #define NAGYHAZI_MALOM_PIECE_H
 #include <iostream>
-#include <vector>
 #include <string>
 #include "position.h"
 #include "colour.h"
@@ -19,13 +18,20 @@ public:
 
     bool is_selected() const;
 
+    int get_radius() const;
+
+    Colour get_colour() const;
+
     Position get_position() const;
 
     void set_position(const Position&);
 
+    void set_selection_true();
+
+    void set_selection_false();
+
     sf::Vector2f where_to_draw() const;
 
-    void draw_piece(sf::RenderWindow& w) const ;
 
 };
 #endif //NAGYHAZI_MALOM_PIECE_H

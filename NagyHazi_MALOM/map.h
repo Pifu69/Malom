@@ -2,6 +2,7 @@
 #define NAGYHAZI_MALOM_MAP_H
 #include <iostream>
 #include "shell.h"
+#include "point.h"
 #include <array>
 
 class Map {

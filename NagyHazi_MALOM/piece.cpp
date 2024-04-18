@@ -9,10 +9,26 @@ bool Piece::is_selected() const {
     return Is_Selected;
 }
 
+int Piece::get_radius() const {
+    return Radius;
+}
+
+Colour Piece::get_colour() const {
+    return Team_Colour;
+}
+
 Position Piece::get_position() const { return Piece_Position.value(); }
 
 void Piece::set_position(const Position &p) {
     Piece_Position = p;
+}
+
+void Piece::set_selection_true() {
+    Is_Selected = true;
+}
+
+void Piece::set_selection_false() {
+    Is_Selected = false;
 }
 
 sf::Vector2f Piece::where_to_draw() const {
@@ -31,16 +47,5 @@ sf::Vector2f Piece::where_to_draw() const {
     res.x -= Radius;
     res.y -= Radius;
     return res;
-}
-
-void Piece::draw_piece(sf::RenderWindow& w) const {
-    sf::Texture t;
-    if (Team_Colour == White) t.loadFromFile("white_piece.png");
-    if (Team_Colour == Black) t.loadFromFile("black_piece.png");
-    sf::CircleShape circle;
-    circle.setTexture(&t);
-    circle.setRadius(Radius);
-    circle.setPosition(where_to_draw());
-    w.draw(circle);
 }
 
