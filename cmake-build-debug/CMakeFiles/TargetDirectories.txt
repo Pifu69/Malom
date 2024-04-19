@@ -1,0 +1,3 @@
+C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/cmake-build-debug/CMakeFiles/NagyHazi_MALOM.dir
+C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/cmake-build-debug/CMakeFiles/rebuild_cache.dir
