@@ -49,12 +49,3 @@ sf::Vector2f Piece::where_to_draw() const {
     return res;
 }
 
-Piece &Piece::operator=(const Piece &piece) {
-    Team_Colour = piece.Team_Colour;
-    Is_Selected = piece.Is_Selected;
-    if (piece.Piece_Position.has_value())
-        Piece_Position.emplace(piece.Piece_Position.value());
-    else
-        Piece_Position.reset();
-    return *this;
-}

@@ -11,13 +11,16 @@ Controller Game_Mech::get_controller() const {
 }
 
 void Game_Mech::phase_control(sf::Vector2f click) {
+    bool happened = false;
     switch (Malom_Game.get_phase()) {
-        case First: Game_Controller.first_phase_controller(Malom_Game, click); break;
-        case Second: Game_Controller.second_phase_controller(Malom_Game, click); break;
-        case Third: Game_Controller.third_phase_controller(Malom_Game, click); break;
+        case First: happened = Game_Controller.first_phase_controller(Malom_Game, click); break;
+        case Second: happened = Game_Controller.second_phase_controller(Malom_Game, click); break;
+        case Third: happened = Game_Controller.third_phase_controller(Malom_Game, click); break;
         default: break;
     }
-    Malom_Game.step_round();
-    Malom_Game.step_phase();
-    Malom_Game.switch_turn();
+    if (happened) {
+        Malom_Game.step_round();
+        Malom_Game.step_phase();
+        Malom_Game.switch_turn();
+    }
 }

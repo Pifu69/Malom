@@ -23,6 +23,7 @@ public:
     size_t search_selected() const;
 
     void set_all_piece_unselected();
+    void set_piece_selected(size_t);
     void set_trap_true();
     void set_trap_false();
     void increase_num();

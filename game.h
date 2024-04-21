@@ -26,6 +26,9 @@ public:
     Phase get_phase() const;
     Colour get_turn() const;
 
+    void set_white_piece_selected(size_t);
+    void set_black_piece_selected(size_t);
+
     void set_white_piece_on_field(const Position&);
     void set_black_piece_on_field(const Position&);
 

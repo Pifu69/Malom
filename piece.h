@@ -33,7 +33,6 @@ public:
 
     sf::Vector2f where_to_draw() const;
 
-    Piece& operator=(const Piece&);
 };
 #endif //NAGYHAZI_MALOM_PIECE_H
 

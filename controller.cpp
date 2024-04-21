@@ -16,7 +16,7 @@ int Controller::distance(sf::Vector2f v1, sf::Vector2f v2) {
 std::optional<Position> Controller::which_point_clicked(sf::Vector2f click, Colour expected) {
     std::optional<Position> pos;
     int max;
-    if (expected == None) max = 5;
+    if (expected == None) max = 8;
     else max = 20;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 8; j++) {
@@ -54,9 +54,9 @@ bool Controller::is_move_valid(const Position& selected, const Position& where_t
     return false;
 }
 
-void Controller::first_phase_controller(Game& game, sf::Vector2f click) {
+bool Controller::first_phase_controller(Game& game, sf::Vector2f click) {
     Colour on_turn = game.get_turn();
-    if (!which_point_clicked(click, None).has_value()) return;
+    if (!which_point_clicked(click, None).has_value()) return false;
     Position clicked = which_point_clicked(click, None).value();
     switch (on_turn) {
         case White:
@@ -64,18 +64,19 @@ void Controller::first_phase_controller(Game& game, sf::Vector2f click) {
             game.set_white_piece_on_field(clicked);
             if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_white_player().set_trap_true();
-            break;
+            return true;
         case Black:
             Game_State[clicked.get_shell()][clicked.get_point()].set_state(Black);
             game.set_black_piece_on_field(clicked);
             if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_black_player().set_trap_true();
-            break;
-        default: break;
+            return true;
+        default: return false;
+
     }
 }
 
-void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
+bool Controller::second_phase_controller(Game& game, sf::Vector2f click) {
     Colour on_turn = game.get_turn();
     Colour expected = game.get_turn();
     switch (on_turn) {
@@ -90,7 +91,7 @@ void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
     if (!which_point_clicked(click, expected).has_value()) {
         if (on_turn == White) game.get_white_player().set_all_piece_unselected();
         if (on_turn == Black) game.get_black_player().set_all_piece_unselected();
-        return;
+        return false;
     }
     Position clicked = which_point_clicked(click, expected).value();
     if (expected == None && on_turn == White) {
@@ -102,7 +103,10 @@ void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
             game.get_white_player().get_pieces()[idx].set_selection_false();
             if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_white_player().set_trap_true();
+            return true;
         }
+        game.get_white_player().get_pieces()[idx].set_selection_false();
+        return false;
     }
     if (expected == None && on_turn == Black) {
         size_t idx = game.get_black_player().search_selected();
@@ -113,19 +117,25 @@ void Controller::second_phase_controller(const Game& game, sf::Vector2f click) {
             game.get_black_player().get_pieces()[idx].set_selection_false();
             if (Game_State.checking_neighbours(Game_State[clicked.get_shell()][clicked.get_point()]))
                 game.get_black_player().set_trap_true();
+            return true;
         }
+        game.get_black_player().get_pieces()[idx].set_selection_false();
+        return false;
     }
     if (expected == White) {
         size_t idx = game.get_white_player().search_piece(clicked);
         game.get_white_player().get_pieces()[idx].set_selection_true();
+        return false;
     }
     if (expected == Black) {
         size_t idx = game.get_black_player().search_piece(clicked);
         game.get_black_player().get_pieces()[idx].set_selection_true();
+        return false;
     }
+    return false;
 }
 
-void Controller::third_phase_controller(const Game &, sf::Vector2f) {
-    return;
+bool Controller::third_phase_controller(const Game &, sf::Vector2f) {
+    return false;
 }
 

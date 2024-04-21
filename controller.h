@@ -20,9 +20,9 @@ public:
 
     bool is_move_valid(const Position&, const Position&) const;
 
-    void first_phase_controller(Game&, sf::Vector2f);
-    void second_phase_controller(const Game&, sf::Vector2f);
-    void third_phase_controller(const Game&, sf::Vector2f);
+    bool first_phase_controller(Game&, sf::Vector2f);
+    bool second_phase_controller(Game&, sf::Vector2f);
+    bool third_phase_controller(const Game&, sf::Vector2f);
 };
 
 #endif //NAGYHAZI_MALOM_CONTROLLER_H

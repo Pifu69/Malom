@@ -13,9 +13,7 @@ add_executable(NagyHazi_MALOM
         game.cpp
         app.cpp
         controller.cpp
-        controller.h
         game_mechanic.cpp
-        game_mechanic.h
 )
 
 set(SFML_STATIC_LIBRARIES TRUE)

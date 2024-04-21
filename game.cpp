@@ -41,7 +41,7 @@ void Game::switch_turn() {
 void Game::step_phase() {
     switch (Game_Phase) {
         case First:
-            if (Game_Round > 9) Game_Phase = Second;
+            if (Game_Round > 18) Game_Phase = Second;
             break;
         case Second:
             if (White_Player.get_num() < 4 || Black_Player.get_num() < 4) Game_Phase = Third;
@@ -63,6 +63,14 @@ void Game::set_white_piece_on_field(const Position &position) {
 void Game::set_black_piece_on_field(const Position &position) {
     Black_Player.set_piece_on_field(position);
     Black_Player.increase_num();
+}
+
+void Game::set_white_piece_selected(size_t i) {
+    White_Player.get_pieces()[i].set_selection_true();
+}
+
+void Game::set_black_piece_selected(size_t i) {
+    Black_Player.get_pieces()[i].set_selection_true();
 }
 
 bool Game::first_phase() const {

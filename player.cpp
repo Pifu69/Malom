@@ -45,6 +45,10 @@ void Player::set_all_piece_unselected() {
         Player_Pieces[i].set_selection_false();
 }
 
+void Player::set_piece_selected(size_t i) {
+    Player_Pieces[i].set_selection_true();
+}
+
 void Player::set_trap_true() {
     Trap = true;
 }
