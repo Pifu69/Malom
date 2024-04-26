@@ -17,10 +17,19 @@ Colour Piece::get_colour() const {
     return Team_Colour;
 }
 
-Position Piece::get_position() const { return Piece_Position.value(); }
+Position Piece::get_position() const {
+    if (Piece_Position.has_value())
+        return Piece_Position.value();
+    else
+        throw "No Piece There";
+}
 
 void Piece::set_position(const Position &p) {
     Piece_Position.emplace(p);
+}
+
+void Piece::set_off_field() {
+    Piece_Position.reset();
 }
 
 void Piece::set_selection_true() {

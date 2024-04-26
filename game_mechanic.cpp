@@ -14,8 +14,8 @@ void Game_Mech::phase_control(sf::Vector2f click) {
     bool happened = false;
     switch (Malom_Game.get_phase()) {
         case First: happened = Game_Controller.first_phase_controller(Malom_Game, click); break;
-        case Second: happened = Game_Controller.second_phase_controller(Malom_Game, click); break;
-        case Third: happened = Game_Controller.third_phase_controller(Malom_Game, click); break;
+        case Second:
+        case Third: happened = Game_Controller.second_and_third_phase_controller(Malom_Game, click); break;
         default: break;
     }
     if (happened) {

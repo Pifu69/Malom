@@ -45,3 +45,11 @@ sf::Vector2f Position::position_to_vector() {
 
     return res;
 }
+
+/*
+bool Position::is_valid_move(const Map& map, Colour colour) {
+    int shell = Position_Shell;
+    int point = Position_Point;
+    if (point % 2)
+}
+ */

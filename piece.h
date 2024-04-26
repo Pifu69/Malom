@@ -11,24 +11,19 @@ class Piece{
     Colour Team_Colour;
     std::optional<Position> Piece_Position;
     bool Is_Selected;
-    static const int Radius = 40;
+    static const int Radius = 50;
 public:
     Piece(Colour = None);
 
     bool is_on_field() const;
-
     bool is_selected() const;
-
     int get_radius() const;
-
     Colour get_colour() const;
-
     Position get_position() const;
 
     void set_position(const Position&);
-
+    void set_off_field();
     void set_selection_true();
-
     void set_selection_false();
 
     sf::Vector2f where_to_draw() const;

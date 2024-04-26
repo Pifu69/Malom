@@ -35,6 +35,7 @@ void App::show() {
     }
     Window.display();
 }
+//#define TEST
 
 void App::app() {
     while(Window.isOpen()) {
@@ -42,50 +43,54 @@ void App::app() {
         while(Window.pollEvent(Event)) {
             if (Event.type == sf::Event::Closed)
                 Window.close();
-            /*if (Event.type == sf::Event::MouseButtonPressed && Event.mouseButton.button == sf::Mouse::Left) {
+#ifndef TEST
+            if (Event.type == sf::Event::MouseButtonPressed && Event.mouseButton.button == sf::Mouse::Left) {
                 std::cout << Event.mouseButton.x << ' ' << Event.mouseButton.y << std::endl;
                 sf::Vector2f click(Event.mouseButton.x, Event.mouseButton.y);
                 Malom.phase_control(click);
-            }*/
+            }
+#endif
         }
-        sf::Vector2f click1(108, 108);
+#ifdef TEST
+        sf::Vector2f click1(110, 104);
         Malom.phase_control(click1);
-        sf::Vector2f click2(108, 540);
+        sf::Vector2f click2(537, 257);
         Malom.phase_control(click2);
-        sf::Vector2f click3(108, 972);
+        sf::Vector2f click3(536, 110);
         Malom.phase_control(click3);
-        sf::Vector2f click4(540, 108);
+        sf::Vector2f click4(977, 109);
         Malom.phase_control(click4);
-        sf::Vector2f click5(972, 108);
+        sf::Vector2f click5(828, 253);
         Malom.phase_control(click5);
-        sf::Vector2f click6(540, 972);
+        sf::Vector2f click6(827, 545);
         Malom.phase_control(click6);
-        sf::Vector2f click7(972, 972);
+        sf::Vector2f click7(252, 262);
         Malom.phase_control(click7);
-        sf::Vector2f click8(972, 540);
+        sf::Vector2f click8(257, 542);
         Malom.phase_control(click8);
-        sf::Vector2f click9(540, 252);
+        sf::Vector2f click9(108, 549);
         Malom.phase_control(click9);
-        sf::Vector2f click10(540, 396);
+        sf::Vector2f click10(107, 969);
         Malom.phase_control(click10);
-        sf::Vector2f click11(828, 540);
+        sf::Vector2f click11(393, 534);
         Malom.phase_control(click11);
-        sf::Vector2f click12(684, 540);
+        sf::Vector2f click12(396, 394);
         Malom.phase_control(click12);
-        sf::Vector2f click13(540, 828);
+        sf::Vector2f click13(539, 396);
         Malom.phase_control(click13);
-        sf::Vector2f click14(540, 684);
+        sf::Vector2f click14(392, 688);
         Malom.phase_control(click14);
-        sf::Vector2f click15(252, 540);
+        sf::Vector2f click15(259, 830);
         Malom.phase_control(click15);
-        sf::Vector2f click16(396, 540);
+        sf::Vector2f click16(688, 397);
         Malom.phase_control(click16);
-        sf::Vector2f click17(396, 396);
+        sf::Vector2f click17(830, 832);
         Malom.phase_control(click17);
-        sf::Vector2f click18(252, 252);
+        sf::Vector2f click18(540, 829);
         Malom.phase_control(click18);
-        sf::Vector2f click(108, 108);
-        Malom.phase_control(click);
+        sf::Vector2f click19(387, 544);
+        Malom.phase_control(click19);
+#endif
         show();
     }
 }

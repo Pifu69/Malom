@@ -2,15 +2,20 @@
 
 Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), Black_Player(Black), White_Player(White) {}
 
-Player Game::get_white_player() const {
+Player& Game::get_white_player() {
     return White_Player;
 }
 
-Player Game::get_black_player() const {
+Player& Game::get_black_player() {
     return Black_Player;
 }
 
-std::array<Piece, 18> Game::get_view() const {
+Player& Game::get_player(Colour colour) {
+    if (colour == White) return White_Player;
+    return Black_Player;
+}
+
+std::array<Piece, 18> Game::get_view() {
     std::array<Piece, 18> All_Pieces;
     size_t idx = 0;
     for (size_t i = 0; i < 9; i++) {
@@ -28,6 +33,12 @@ Phase Game::get_phase() const {
 
 Colour Game::get_turn() const {
     return Turn;
+}
+
+bool Game::Is_Trap(Colour player) const {
+    if (player == White) return White_Player.has_trap();
+    if (player == Black) return Black_Player.has_trap();
+    return false;
 }
 
 void Game::switch_turn() {
@@ -55,22 +66,8 @@ void Game::step_round() {
     Game_Round += 1;
 }
 
-void Game::set_white_piece_on_field(const Position &position) {
-    White_Player.set_piece_on_field(position);
-    White_Player.increase_num();
-}
-
-void Game::set_black_piece_on_field(const Position &position) {
-    Black_Player.set_piece_on_field(position);
-    Black_Player.increase_num();
-}
-
-void Game::set_white_piece_selected(size_t i) {
-    White_Player.get_pieces()[i].set_selection_true();
-}
-
-void Game::set_black_piece_selected(size_t i) {
-    Black_Player.get_pieces()[i].set_selection_true();
+void Game::set_end_game() {
+    Game_Phase = End;
 }
 
 bool Game::first_phase() const {

@@ -20,21 +20,18 @@ public:
     Game();
 
     int get_game_round() const;
-    Player get_white_player() const;
-    Player get_black_player() const;
-    std::array<Piece, 18> get_view() const;
+    Player& get_white_player();
+    Player& get_black_player();
+    Player& get_player(Colour);
+    std::array<Piece, 18> get_view();
     Phase get_phase() const;
     Colour get_turn() const;
-
-    void set_white_piece_selected(size_t);
-    void set_black_piece_selected(size_t);
-
-    void set_white_piece_on_field(const Position&);
-    void set_black_piece_on_field(const Position&);
+    bool Is_Trap(Colour) const;
 
     void switch_turn();
     void step_phase();
     void step_round();
+    void set_end_game();
 
     bool first_phase() const;
     bool second_phase() const;
