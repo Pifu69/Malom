@@ -9,10 +9,7 @@ class Game_Mech {
     Controller Game_Controller;
 public:
     Game_Mech();
-
     Game get_game() const;
-    Controller get_controller() const;
-
     void phase_control(sf::Vector2f);
 };
 

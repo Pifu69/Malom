@@ -6,10 +6,6 @@ Game Game_Mech::get_game() const {
     return Malom_Game;
 }
 
-Controller Game_Mech::get_controller() const {
-    return Game_Controller;
-}
-
 void Game_Mech::phase_control(sf::Vector2f click) {
     bool happened = false;
     switch (Malom_Game.get_phase()) {

@@ -3,7 +3,7 @@
 #include "position.h"
 
 int main(void){
-    App app;
+    App app(1080);
     app.app();
     return 0;
 }

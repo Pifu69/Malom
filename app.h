@@ -8,10 +8,15 @@
 #include "game_mechanic.h"
 
 class App {
+    float Window_Size;
+    sf::Texture Window_Texture;
     sf::RenderWindow Window;
+    sf::RectangleShape Board;
+    sf::Texture White_Piece;
+    sf::Texture Black_Piece;
     Game_Mech Malom;
 public:
-    App();
+    App(float);
 
     void draw_piece(const Piece&);
     void show();

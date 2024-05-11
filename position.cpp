@@ -1,17 +1,18 @@
 #include "position.h"
 
-Position::Position(int shell, int point) : Position_Shell(shell), Position_Point(point) {}
+Position::Position(size_t shell, size_t point) : Position_Shell(shell), Position_Point(point) {}
 
-void Position::set_position(int shell, int point) {
-    Position_Shell = shell;
-    Position_Point = point;
+size_t make_index_valid(int idx, int max) {
+    if (idx < 0) idx += max;
+    if (idx >= max) idx -= max;
+    return idx;
 }
 
-int Position::get_shell() const {
+size_t Position::get_shell() const {
     return Position_Shell;
 }
 
-int Position::get_point() const {
+size_t Position::get_point() const {
     return Position_Point;
 }
 
@@ -23,14 +24,14 @@ Position& Position::operator=(const Position& p){
     return *this;
 }
 
-bool Position::operator==(const Position& position) {
+bool Position::operator==(const Position& position) const {
     if (Position_Shell == position.Position_Shell && Position_Point == position.Position_Point)
         return true;
     else
         return false;
 }
 
-sf::Vector2f Position::position_to_vector() {
+sf::Vector2f Position::position_to_vector() const {
     sf::Vector2f res;
     float d = (3 - Position_Shell) * 144;;
     res.x = 108 + Position_Shell * 144;
@@ -46,10 +47,25 @@ sf::Vector2f Position::position_to_vector() {
     return res;
 }
 
-/*
-bool Position::is_valid_move(const Map& map, Colour colour) {
-    int shell = Position_Shell;
-    int point = Position_Point;
-    if (point % 2)
+bool Position::is_move_valid(const Position& where_to) const {
+    if (Position_Point % 2 != 0 && Position_Shell % 2 == 0) {
+        if (where_to.get_shell() == 1 && where_to.get_point() == Position_Point) return true;
+        if ((make_index_valid(where_to.get_point()+1, 8) == Position_Point
+             || make_index_valid(where_to.get_point()-1, 8) == Position_Point)
+            && where_to.get_shell() == Position_Shell) return true;
+    }
+    if (Position_Point % 2 != 0 && Position_Shell % 2 != 0) {
+        if (where_to.get_point() == Position_Point
+            && (make_index_valid(where_to.get_shell()+1, 3) == Position_Shell
+                || make_index_valid(where_to.get_shell()-1, 3) == Position_Shell)) return true;
+        if (where_to.get_shell() == Position_Shell
+            && (make_index_valid(where_to.get_point()+1, 8) == Position_Point
+                || make_index_valid(where_to.get_point()-1, 8) == Position_Shell)) return true;
+    }
+    if (Position_Point % 2 == 0) {
+        if (where_to.get_shell() == Position_Shell
+            && (make_index_valid(where_to.get_point()+1, 8) == Position_Point
+                || make_index_valid(where_to.get_point()-1, 8) == Position_Point)) return true;
+    }
+    return false;
 }
- */

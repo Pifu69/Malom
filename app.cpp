@@ -1,18 +1,21 @@
 #include "app.h"
 
-App::App() : Malom() {
-    Window.create(sf::VideoMode(1080, 1080), "Malom", sf::Style::Close);
+App::App(float size) : Window_Size(size), Malom() {
+    Window.create(sf::VideoMode(Window_Size, Window_Size), "Malom", sf::Style::Close);
+    Window_Texture.loadFromFile("C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/graph/malomtabla.png");
+    Board.setSize(sf::Vector2f(Window_Size, Window_Size));
+    Board.setTexture(&Window_Texture);
+    White_Piece.loadFromFile("C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/graph/white_piece.png");
+    Black_Piece.loadFromFile("C:/Users/Zsombi/program/egyetem/C++/NagyHazi_MALOM/graph/black_piece.png");
 }
 
 void App::draw_piece(const Piece& piece) {
     if (piece.is_on_field()) {
-        sf::Texture t;
-        if (piece.get_colour() == White) t.loadFromFile("white_piece.png");
-        if (piece.get_colour() == Black) t.loadFromFile("black_piece.png");
         sf::CircleShape circle;
-        circle.setTexture(&t);
-        circle.setRadius(piece.get_radius());
-        circle.setPosition(piece.where_to_draw());
+        if (piece.get_colour() == White) circle.setTexture(&White_Piece);
+        if (piece.get_colour() == Black) circle.setTexture(&Black_Piece);
+        circle.setRadius(Window_Size/20);
+        circle.setPosition(piece.where_to_draw(Window_Size/20));
         if (piece.is_selected()) {
             circle.setOutlineThickness(4.f);
             circle.setOutlineColor(sf::Color::Red);
@@ -22,13 +25,8 @@ void App::draw_piece(const Piece& piece) {
 }
 
 void App::show() {
-    sf::Texture texture;
-    texture.loadFromFile("malomtabla.png");
-    sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f(1080, 1080));
-    rect.setTexture(&texture);
     Window.clear(sf::Color::White);
-    Window.draw(rect);
+    Window.draw(Board);
     std::array<Piece, 18> All_Pieces = Malom.get_game().get_view();
     for (size_t i = 0; i < 18; i++) {
         draw_piece(All_Pieces[i]);

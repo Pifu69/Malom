@@ -8,6 +8,9 @@ protected:
     Colour Point_Colour;
     Position Point_Position;
 public:
+    ///@brief Point osztály konstruktora
+    ///@param shell_index az objektum pozíciójának első koordinátája
+    ///@param index az objektum pozíciójának második koordinátája
     Point(size_t shell_index, size_t index);
 
     Position get_position() const;

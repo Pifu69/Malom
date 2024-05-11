@@ -14,4 +14,3 @@ void Point::set_state(Colour tc) {
     Point_Colour = tc;
 }
 
-

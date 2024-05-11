@@ -1,14 +1,6 @@
 #include "game.h"
 
-Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), Black_Player(Black), White_Player(White) {}
-
-Player& Game::get_white_player() {
-    return White_Player;
-}
-
-Player& Game::get_black_player() {
-    return Black_Player;
-}
+Game::Game() : Turn(White), Game_Phase(First), Game_Round(1), White_Player(White), Black_Player(Black) {}
 
 Player& Game::get_player(Colour colour) {
     if (colour == White) return White_Player;
@@ -33,12 +25,6 @@ Phase Game::get_phase() const {
 
 Colour Game::get_turn() const {
     return Turn;
-}
-
-bool Game::Is_Trap(Colour player) const {
-    if (player == White) return White_Player.has_trap();
-    if (player == Black) return Black_Player.has_trap();
-    return false;
 }
 
 void Game::switch_turn() {
@@ -69,16 +55,3 @@ void Game::step_round() {
 void Game::set_end_game() {
     Game_Phase = End;
 }
-
-bool Game::first_phase() const {
-    return (Game_Phase == First);
-}
-
-bool Game::second_phase() const {
-    return (Game_Phase == Second);
-}
-
-bool Game::third_phase() const {
-    return (Game_Phase == Third);
-}
-

@@ -12,18 +12,7 @@ class Controller {
 public:
     Controller();
 
-    int make_index_valid(int, int) const;
-
-    int distance(sf::Vector2f, sf::Vector2f);
-
-    std::optional<Position> which_point_clicked(sf::Vector2f, Colour);
-
-    bool is_there_move(const Position&) const;
-    bool can_move(Colour) const;
-
-    bool is_player_blocked(Colour) const;
-    bool is_move_valid(const Position&, const Position&) const;
-    bool valid_move_condition(Game&, Colour, size_t, Position&) const;
+    static bool valid_move_condition(Game&, Colour, size_t, Position&);
 
     bool click_control(Game&, Colour, Colour, Position);
     bool trap_control(Game&, Colour, sf::Vector2f);

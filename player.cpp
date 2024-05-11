@@ -11,7 +11,7 @@ int Player::get_num() const {
     return Num_Of_Pieces_On_Field;
 }
 
-std::array<Piece, 9>& Player::get_pieces(){
+std::array<Piece, 9>& Player::get_pieces() {
     return Player_Pieces;
 }
 
@@ -36,18 +36,20 @@ bool Player::has_trap() const {
     return Trap;
 }
 
-size_t Player::search_piece(const Position &position) {
+std::optional<size_t> Player::search_piece(const Position &position) {
+    std::optional<size_t> idx;
     for (size_t i = 0; i < 9; i++) {
-        if (Player_Pieces[i].is_on_field() && Player_Pieces[i].get_position() == position) return i;
+        if (Player_Pieces[i].is_on_field() && Player_Pieces[i].get_position() == position) idx = i;
     }
-    return -1;
+    return idx;
 }
 
-size_t Player::search_selected() const {
+std::optional<size_t> Player::search_selected() const {
+    std::optional<size_t> idx;
     for (size_t i = 0; i < 9; i++) {
-        if (Player_Pieces[i].is_selected()) return i;
+        if (Player_Pieces[i].is_selected()) idx = i;
     }
-    return -1;
+    return idx;
 }
 
 void Player::set_all_piece_unselected() {

@@ -20,10 +20,9 @@ public:
     bool has_trap() const;
     bool is_there_selected() const;
     bool is_all_in_trap(const Map&) const;
-    bool is_blocked(const Map&) const;
 
-    size_t search_piece(const Position &position);
-    size_t search_selected() const;
+    std::optional<size_t> search_piece(const Position &position);
+    std::optional<size_t> search_selected() const;
 
     void set_all_piece_unselected();
     void set_piece_selected(size_t);
